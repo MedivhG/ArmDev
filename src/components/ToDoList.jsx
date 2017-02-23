@@ -4,25 +4,30 @@ export default class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tdl: []
+            tdl: [],
+            usrInp: ''
         }
     }
 
-    addTdl = () => {
-        const tdl = this.state.tdl.concat(ToDoList);
-        this.setState({tdl});
-    }
-
+    inpChange = (e) => {
+      const tdl = this.state.tdl.concat(ToDoList);
+      if(this.state.usrInp.length===0) {this.setState({
+      usrInp: e.target.value,
+      tdl
+    });
+  }
+}
     render() {
         const tdl = this.state.tdl.map((Tdl, index) => {
             return <Tdl index={index} key={index}/>
         });
         return <div>
-            <input type="text" onDoubleClick={this.addTdl}/>
+            <input type="text" onChange={this.inpChange}/>
             <State/>
             <AddFiles/>
             <p>
                 {tdl}
+            {/*  {this.state.usrInp.length} */}
             </p>
         </div>
     }
